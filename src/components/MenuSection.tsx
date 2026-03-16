@@ -77,6 +77,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍡",
     price: 750,
+    image: "/assets/pork-barbecue.png",
   },
   {
     id: "pork-liempo-bbq",
@@ -101,6 +102,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🫙",
     price: 900,
+    image: "/assets/pork-binagoongan.png",
   },
   {
     id: "creamy-pork-mushroom",
@@ -133,6 +135,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🥘",
     price: 900,
+    image: "/assets/kaldareta.png",
   },
   {
     id: "menudo",
@@ -141,6 +144,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🥘",
     price: 900,
+    image: "/assets/menudo.png",
   },
   {
     id: "igado",
@@ -165,6 +169,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🦐",
     price: 800,
+    image: "/assets/garlic-butter-shrimp.png",
   },
   {
     id: "beef-broccoli",
@@ -173,6 +178,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🥦",
     price: 999,
+    image: "/assets/beef-broccoli.png",
   },
   {
     id: "creamy-beef-mushroom",
@@ -181,6 +187,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍄",
     price: 999,
+    image: "/assets/creamy-beef-mushroom.png",
   },
   {
     id: "fish-fillet",
@@ -197,6 +204,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍗",
     price: 750,
+    image: "/assets/chicken-fillet.png",
   },
   {
     id: "chicken-wings",
@@ -206,6 +214,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍗",
     price: 800,
+    image: "/assets/chicken-wings.png",
   },
   {
     id: "cordon-bleu",
@@ -214,6 +223,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🧀",
     price: 800,
+    image: "/assets/cordon-bleu.png",
   },
   {
     id: "fried-chicken",
@@ -238,6 +248,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍋",
     price: 900,
+    image: "/assets/chicken-sweet-sour.png",
   },
 
   // ── PASTA ──────────────────────────────────────────────────────────────────
@@ -247,6 +258,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Pasta in a rich, velvety cream sauce with smoky bacon bits and a touch of black pepper. Filipino-style carbonara done right — thick, indulgent, and always the first pasta to be finished.",
     category: "pasta",
     icon: "🍝",
+    image: "/assets/carbonara.jpg",
     sizes: [
       { label: "Medium",  price: 750  },
       { label: "Large",   price: 850  },
@@ -283,6 +295,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "A beloved Filipino-style sweet spaghetti — creamy tomato meat sauce tossed with perfectly cooked pasta. A nostalgic party staple that kids and adults equally adore. Always the first to disappear.",
     category: "pasta",
     icon: "🍝",
+    image: "/assets/creamy-spaghetti.png",
     sizes: [
       { label: "Medium",  price: 750 },
       { label: "Large",   price: 850 },
@@ -295,6 +308,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Macaroni pasta baked in a rich, creamy cheese sauce until golden and bubbly on top. Pure cheesy comfort in every spoonful — the crowd-favorite that never fails to impress at any occasion.",
     category: "pasta",
     icon: "🧀",
+    image: "/assets/bakemac.jpg",
     sizes: [
       { label: "Medium",  price: 750 },
       { label: "Large",   price: 850 },
@@ -319,6 +333,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Thick rice noodles drenched in a rich, savory shrimp-based gravy and topped with crushed chicharon, boiled eggs, tinapa flakes, and spring onions. A Filipino celebration staple, full of tradition.",
     category: "pasta",
     icon: "🍜",
+    image: "/assets/palabok.png",
     sizes: [
       { label: "Medium",  price: 650 },
       { label: "Large",   price: 800 },
@@ -366,6 +381,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "vegetable",
     icon: "🥬",
     price: 800,
+    image: "/assets/chopsuey.png",
   },
   {
     id: "fresh-lumpia",
@@ -392,6 +408,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "vegetable",
     icon: "🥟",
     price: 550,
+    image: "/assets/veggie-spring-rolls.png",
   },
   {
     id: "laing",
@@ -410,6 +427,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "dessert",
     icon: "🍮",
     price: 400,
+    image: "/assets/baked-kalamay.png",
   },
   {
     id: "biko",
@@ -418,6 +436,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "dessert",
     icon: "🍚",
     price: 400,
+    image: "/assets/biko.png",
   },
   {
     id: "fruit-salad",
