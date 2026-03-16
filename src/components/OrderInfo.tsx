@@ -97,7 +97,7 @@ export default function OrderInfo() {
                 Ready to place your order?
               </p>
               <p className="font-display text-stone-800 dark:text-white text-2xl font-semibold">
-                Let's get cooking 🍳
+                Let&apos;s get cooking 🍳
               </p>
             </div>
 

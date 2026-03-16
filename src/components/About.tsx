@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 const FEATURES = [
   {
@@ -30,7 +30,6 @@ const fadeUp = (delay = 0) => ({
 
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section id="about" ref={ref} className="relative py-32 overflow-hidden bg-white dark:bg-background">

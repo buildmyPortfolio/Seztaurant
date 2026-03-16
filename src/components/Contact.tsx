@@ -58,7 +58,7 @@ export default function Contact() {
             Find <span className="text-shimmer">Us</span>
           </h2>
           <p className="font-sans text-stone-500 dark:text-white/40 text-base max-w-md mx-auto leading-relaxed">
-            We'd love to hear from you. Reach out to place an order or ask any questions.
+            We&apos;d love to hear from you. Reach out to place an order or ask any questions.
           </p>
         </motion.div>
 
