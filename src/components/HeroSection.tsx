@@ -214,7 +214,7 @@ export default function HeroSection() {
             style={{
               background: "linear-gradient(110deg, #c9a227 0%, #F5E070 50%, #c9a227 100%)",
               color: "#050505",
-              boxShadow: "0 0 28px rgba(212,175,55,0.28), 0 4px 18px rgba(212,175,55,0.16), inset 0 1px 0 rgba(255,255,255,0.22)",
+              boxShadow: "0 0 28px rgba(212,175,55,0.30), 0 4px 18px rgba(212,175,55,0.18), inset 0 1px 0 rgba(255,255,255,0.22)",
               maxWidth: "260px",
             }}
           >
@@ -231,7 +231,7 @@ export default function HeroSection() {
           {/* Secondary */}
           <button
             onClick={() => document.getElementById("order")?.scrollIntoView({ behavior: "smooth" })}
-            className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 bg-transparent text-black/45 dark:text-white/48 border border-gold/28 dark:border-gold/20 font-sans text-[11px] rounded-full tracking-[0.22em] uppercase hover:bg-gold/[0.07] hover:text-black/70 dark:hover:text-white/85 hover:border-gold/50 transition-all duration-300 active:scale-95"
+            className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 bg-transparent text-stone-700 dark:text-white/70 border border-stone-400 dark:border-white/30 font-sans text-[11px] rounded-full tracking-[0.22em] uppercase hover:bg-stone-100 dark:hover:bg-white/[0.08] hover:text-stone-900 dark:hover:text-white hover:border-gold/60 dark:hover:border-gold/50 transition-all duration-300 active:scale-95"
             style={{ maxWidth: "260px" }}
           >
             How to Order

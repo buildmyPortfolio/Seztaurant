@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "Menu",    id: "menu" },
@@ -49,21 +50,21 @@ export default function Navbar() {
           {/* ── Logo ── */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2.5 shrink-0"
+            className="flex items-center shrink-0"
           >
-            <div className="relative w-8 h-8">
-              <div className="absolute inset-0 rounded-full bg-gold opacity-20 blur-sm" />
-              <div className="relative w-8 h-8 rounded-full bg-gold flex items-center justify-center">
-                <span className="font-display font-bold text-background text-sm leading-none">S</span>
-              </div>
-            </div>
-            <span className={`font-display font-semibold text-lg tracking-wide leading-none transition-colors duration-300 ${
-              scrolled
-                ? "text-stone-800 dark:text-white"
-                : "text-stone-800 dark:text-white"
-            }`}>
-              eztaurant
-            </span>
+            {/* Light mode: LogoBlack, Dark mode: Logo (white) */}
+            {mounted && (
+              <Image
+                src={isDark ? "/assets/Logo.jpg" : "/assets/LogoBlack.jpg"}
+                alt="Seztaurant"
+                width={140}
+                height={40}
+                className="h-9 w-auto object-contain"
+                priority
+              />
+            )}
+            {/* Fallback before mount to avoid layout shift */}
+            {!mounted && <div className="h-9 w-[140px]" />}
           </button>
 
           {/* ── Desktop links ── */}
