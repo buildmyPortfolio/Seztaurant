@@ -69,10 +69,11 @@ const TextBeat = ({
 
 export default function SeztaurantReveal() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const canvasRef    = useRef<HTMLCanvasElement>(null);
+  // Frames stored in a ref — no re-render needed when individual frames load
+  const framesRef    = useRef<(HTMLImageElement | null)[]>(new Array(FRAME_COUNT).fill(null));
+  const [ready, setReady]           = useState(false);  // true once frame 0 is loaded
   const [loadedCount, setLoadedCount] = useState(0);
-  const [isReady, setIsReady] = useState(false);
 
   // Scroll tracking
   const { scrollYProgress } = useScroll({
@@ -86,103 +87,90 @@ export default function SeztaurantReveal() {
     restDelta: 0.001
   });
 
-  // Preload Images
+  // Load frame 0 first for instant display, then stream the rest in parallel
   useEffect(() => {
     let canceled = false;
+    let count = 0;
 
-    const loadImages = async () => {
-      const ordered: HTMLImageElement[] = new Array(FRAME_COUNT);
-      let count = 0;
-
-      await Promise.all(
-        Array.from({ length: FRAME_COUNT }, (_, i) =>
-          new Promise<void>((resolve) => {
-            const img = new Image();
-            img.src = `/sequence/frame_${i.toString().padStart(3, "0")}.webp`;
-            img.onload = () => {
-              ordered[i] = img;
-              count++;
-              setLoadedCount(count);
-              resolve();
-            };
-            img.onerror = () => {
-              ordered[i] = img;
-              count++;
-              setLoadedCount(count);
-              resolve();
-            };
-          })
-        )
-      );
-
-      if (!canceled) {
-        setImages(ordered);
-        setIsReady(true);
-      }
+    const loadOne = (i: number, onDone?: () => void) => {
+      const img = new Image();
+      img.src = `/sequence/frame_${i.toString().padStart(3, "0")}.webp`;
+      const finish = () => {
+        if (canceled) return;
+        framesRef.current[i] = img;
+        count++;
+        setLoadedCount(count);
+        onDone?.();
+      };
+      img.onload  = finish;
+      img.onerror = finish;
     };
 
-    loadImages();
+    // Frame 0 → show canvas immediately
+    loadOne(0, () => {
+      if (!canceled) setReady(true);
+      // Load all remaining frames in parallel in the background
+      for (let i = 1; i < FRAME_COUNT; i++) loadOne(i);
+    });
 
-    return () => {
-      canceled = true;
-    };
+    return () => { canceled = true; };
   }, []);
 
-  // Frame updating logic
+  // Frame rendering
   useEffect(() => {
-    if (!isReady || images.length === 0 || !canvasRef.current) return;
+    if (!ready || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
     let localFrame = 0;
-    
-    // Draw an image onto the canvas:
-    // portrait (mobile) → contain so full image is visible
-    // landscape (desktop) → cover so it fills the screen
-    const drawImage = (img: HTMLImageElement) => {
-      if (!img || !img.width) return;
-      const { width, height } = canvas;
 
+    const drawFrame = (idx: number) => {
+      // Use requested frame, or fall back to the nearest already-loaded frame
+      let img = framesRef.current[idx];
+      if (!img) {
+        for (let i = idx - 1; i >= 0; i--) {
+          if (framesRef.current[i]) { img = framesRef.current[i]; break; }
+        }
+      }
+      if (!img || !img.width) return;
+
+      const { width, height } = canvas;
       const isPortrait = height > width;
+      // Portrait (mobile): zoom contain ×1.35 — fills most of the screen without hard-cropping
+      // Landscape (desktop): full cover — fills edge-to-edge
       const scale = isPortrait
-        ? Math.min(width / img.width, height / img.height)   // contain on mobile
-        : Math.max(width / img.width, height / img.height);  // cover on desktop
+        ? Math.min(width / img.width, height / img.height) * 1.35
+        : Math.max(width / img.width, height / img.height);
 
       const x = (width  / 2) - (img.width  / 2) * scale;
       const y = (height / 2) - (img.height / 2) * scale;
 
       ctx.fillStyle = "#050505";
       ctx.fillRect(0, 0, width, height);
-
       ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
 
-    // Initial draw
-    drawImage(images[0]);
-
     const resizeCanvas = () => {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
+      canvas.width  = window.innerWidth  * dpr;
       canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.width  = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
-      drawImage(images[localFrame]);
+      drawFrame(localFrame);
     };
 
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
     const unsubscribe = smoothProgress.on("change", (latest) => {
-      // Map global progress to frame index
       let targetFrame = Math.floor(latest * (FRAME_COUNT - 1));
       if (targetFrame < 0) targetFrame = 0;
       if (targetFrame >= FRAME_COUNT) targetFrame = FRAME_COUNT - 1;
-      
       if (targetFrame !== localFrame) {
         localFrame = targetFrame;
-        requestAnimationFrame(() => drawImage(images[localFrame]));
+        requestAnimationFrame(() => drawFrame(localFrame));
       }
     });
 
@@ -190,33 +178,21 @@ export default function SeztaurantReveal() {
       window.removeEventListener("resize", resizeCanvas);
       unsubscribe();
     };
-  }, [isReady, images, smoothProgress]);
+  }, [ready, smoothProgress]);
 
   // Indicator fades out by 10%
   const indicatorOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
 
   return (
     <section ref={containerRef} className="relative h-[250vh] md:h-[400vh] bg-background">
-      {!isReady ? (
-        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-background">
-          <div className="relative w-64 h-1 bg-white/10 rounded-full overflow-hidden mb-6">
-            <motion.div 
-              className="absolute top-0 left-0 h-full bg-gold"
-              initial={{ width: 0 }}
-              animate={{ width: `${Math.round((loadedCount / FRAME_COUNT) * 100)}%` }}
-              transition={{ ease: "linear" }}
-            />
-          </div>
-          <div className="flex items-center gap-4 text-gold">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-              className="w-4 h-4 rounded-full border-2 border-gold/20 border-t-gold"
-            />
-            <span className="font-sans font-light tracking-widest text-sm">
-              PREPARING {Math.round((loadedCount / FRAME_COUNT) * 100)}%
-            </span>
-          </div>
+      {!ready ? (
+        // Minimal splash — frame 0 loads in ~100-300ms so this is barely visible
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center bg-background">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            className="w-5 h-5 rounded-full border-2 border-gold/20 border-t-gold"
+          />
         </div>
       ) : (
         <div className="sticky top-0 h-screen w-full overflow-hidden">
