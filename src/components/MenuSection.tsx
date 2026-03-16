@@ -68,6 +68,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🥟",
     price: 650,
+    image: "/assets/pork-shanghai.jpg",
   },
   {
     id: "pork-barbecue",
@@ -86,6 +87,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🥩",
     price: 950,
+    image: "/assets/pork-liempo-bbq.jpg",
   },
   {
     id: "pork-hamonado",
@@ -94,6 +96,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍖",
     price: 950,
+    image: "/assets/pork-hamonado.jpg",
   },
   {
     id: "pork-binagoongan",
@@ -111,6 +114,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍄",
     price: 950,
+    image: "/assets/creamy-pork-mushroom.jpg",
   },
   {
     id: "pork-humba",
@@ -118,15 +122,15 @@ const MENU_ITEMS: MenuItem[] = [
     description: "A Visayan-style braised pork belly slow-cooked with soy sauce, vinegar, brown sugar, and banana blossoms. Sweet, tangy, and deeply comforting — a dish that feels like a warm hug.",
     category: "main",
     icon: "🫕",
-    price: 950,
-  },
+    price: 950,    image: "/assets/pork-humba.jpg",  },
   {
     id: "bicol-express",
     name: "Bicol Express",
-    description: "A fiery Bicolano classic — pork strips slow-simmered in thick coconut milk with bird's eye chili and shrimp paste. Creamy, spicy, and utterly addictive. A must-try Filipino comfort dish.",
+    description: "A fiery Bicolano classic — pork strips slow-simmered in thick coconut milk with bird\'s eye chili and shrimp paste. Creamy, spicy, and utterly addictive. A must-try Filipino comfort dish.",
     category: "main",
     icon: "🌶️",
     price: 900,
+    image: "/assets/bicol-express.jpg",
   },
   {
     id: "caldereta",
@@ -153,6 +157,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍖",
     price: 900,
+    image: "/assets/igado.jpg",
   },
   {
     id: "kare-kare",
@@ -161,6 +166,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🥜",
     price: 950,
+    image: "/assets/kare-kare.jpg",
   },
   {
     id: "garlic-butter-shrimp",
@@ -196,6 +202,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🐟",
     price: 750,
+    image: "/assets/fish-fillet.jpg",
   },
   {
     id: "chicken-fillet",
@@ -232,6 +239,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍗",
     price: 800,
+    image: "/assets/fried-chicken.jpg",
   },
   {
     id: "chicken-bbq-sauce",
@@ -240,6 +248,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "main",
     icon: "🍡",
     price: 900,
+    image: "/assets/chicken-bbq-sauce.jpg",
   },
   {
     id: "chicken-sweet-sour",
@@ -271,6 +280,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Tender pasta tossed with flaked tuna, tomatoes, and herbs in a light, flavorful sauce. Fresh, satisfying, and perfect for every gathering — a lighter pasta option that still delivers on taste.",
     category: "pasta",
     icon: "🐟",
+    image: "/assets/tuna-pasta.jpg",
     sizes: [
       { label: "Medium",  price: 750 },
       { label: "Large",   price: 850 },
@@ -283,6 +293,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Pasta loaded with sliced Hungarian sausage in a savory, slightly spiced tomato cream sauce. Hearty, flavorful, and incredibly satisfying — a pasta that makes people reach for seconds.",
     category: "pasta",
     icon: "🌭",
+    image: "/assets/hungarian-pasta.jpg",
     sizes: [
       { label: "Medium",  price: 750 },
       { label: "Large",   price: 850 },
@@ -321,6 +332,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Layers of flat pasta, richly seasoned meat sauce, and silky béchamel, baked to a perfect bubbling golden top. A true showstopper for any celebration — impressive, hearty, and deeply satisfying.",
     category: "pasta",
     icon: "🫕",
+    image: "/assets/lasagna.jpg",
     sizes: [
       { label: "Medium",  price: 800  },
       { label: "Large",   price: 950  },
@@ -346,6 +358,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Stir-fried egg noodles with tender chicken, pork, and a colorful mix of vegetables in a savory sauce. A classic Filipino pansit that symbolizes long life and good fortune — always a hit.",
     category: "pasta",
     icon: "🍜",
+    image: "/assets/pansit-canton.jpg",
     sizes: [
       { label: "Medium",  price: 700 },
       { label: "Large",   price: 850 },
@@ -358,6 +371,7 @@ const MENU_ITEMS: MenuItem[] = [
     description: "Silky thin rice vermicelli stir-fried with vegetables, chicken, and pork in a light, flavorful sauce. A Filipino celebration essential — light on the palate but rich in authentic homemade flavor.",
     category: "pasta",
     icon: "🍜",
+    image: "/assets/pansit-bihon.jpg",
     sizes: [
       { label: "Medium",  price: 650 },
       { label: "Large",   price: 800 },
@@ -373,6 +387,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "vegetable",
     icon: "🥚",
     price: 850,
+    image: "/assets/sipo-egg.jpg",
   },
   {
     id: "chopsuey",
@@ -391,14 +406,16 @@ const MENU_ITEMS: MenuItem[] = [
     category: "vegetable",
     icon: "🥗",
     price: 750,
+    image: "/assets/fresh-lumpia.jpg",
   },
   {
     id: "lumpiang-hubad",
     name: "Lumpiang Hubad",
-    description: "The 'naked' lumpia — all the delicious filling served without the wrapper. Topped with sweet garlic sauce, crushed peanuts, and spring onions. A healthier twist on a beloved Filipino classic.",
+    description: "The \'naked\' lumpia — all the delicious filling served without the wrapper. Topped with sweet garlic sauce, crushed peanuts, and spring onions. A healthier twist on a beloved Filipino classic.",
     category: "vegetable",
     icon: "🌯",
     price: 650,
+    image: "/assets/lumpiang-hubad.jpg",
   },
   {
     id: "veggie-spring-rolls",
@@ -417,6 +434,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "vegetable",
     icon: "🌿",
     price: 750,
+    image: "/assets/laing.jpg",
   },
 
   // ── DESSERT ────────────────────────────────────────────────────────────────
@@ -445,6 +463,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "dessert",
     icon: "🍓",
     price: 800,
+    image: "/assets/fruit-salad.jpg",
   },
   {
     id: "coffee-jelly",
@@ -453,6 +472,7 @@ const MENU_ITEMS: MenuItem[] = [
     category: "dessert",
     icon: "☕",
     price: 700,
+    image: "/assets/coffee-jelly.jpg",
   },
   {
     id: "buko-pandan",
@@ -461,14 +481,16 @@ const MENU_ITEMS: MenuItem[] = [
     category: "dessert",
     icon: "🥥",
     price: 750,
+    image: "/assets/buko-pandan.jpg",
   },
   {
     id: "customize-cake",
     name: "Customize Cake",
-    description: "Tell us your occasion — birthday, anniversary, or any special celebration — and we'll create a custom cake tailored just for you. Reach out with your preferences, design ideas, and we'll make it unforgettable.",
+    description: "Tell us your occasion — birthday, anniversary, or any special celebration — and we\'ll create a custom cake tailored just for you. Reach out with your preferences, design ideas, and we\'ll make it unforgettable.",
     category: "dessert",
     icon: "🎂",
     price: null,
+    image: "/assets/customize-cake.jpg",
   },
 ];
 
