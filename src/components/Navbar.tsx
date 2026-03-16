@@ -58,7 +58,9 @@ export default function Navbar() {
               </div>
             </div>
             <span className={`font-display font-semibold text-lg tracking-wide leading-none transition-colors duration-300 ${
-              scrolled ? "text-stone-800 dark:text-white" : "text-white"
+              scrolled
+                ? "text-stone-800 dark:text-white"
+                : "text-stone-800 dark:text-white"
             }`}>
               eztaurant
             </span>
@@ -73,7 +75,7 @@ export default function Navbar() {
                 className={`font-sans text-[11px] tracking-[0.15em] uppercase transition-colors duration-200 ${
                   scrolled
                     ? "text-stone-500 hover:text-stone-900 dark:text-white/50 dark:hover:text-white"
-                    : "text-white/60 hover:text-white"
+                    : "text-stone-500 hover:text-stone-900 dark:text-white/60 dark:hover:text-white"
                 }`}
               >
                 {link.label}
