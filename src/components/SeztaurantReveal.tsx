@@ -89,34 +89,35 @@ export default function SeztaurantReveal() {
   // Preload Images
   useEffect(() => {
     let canceled = false;
-    const loadedImages: HTMLImageElement[] = [];
 
     const loadImages = async () => {
-      for (let i = 0; i < FRAME_COUNT; i++) {
-        if (canceled) break;
-        const img = new Image();
-        const frameId = i.toString().padStart(3, "0");
-        img.src = `/sequence/frame_${frameId}.webp`;
-        
-        await new Promise<void>((resolve) => {
-          img.onload = () => {
-            loadedImages.push(img);
-            setLoadedCount(prev => prev + 1);
-            resolve();
-          };
-          img.onerror = () => {
-            console.error(`Failed to load ${img.src}`);
-            // Push empty/null placeholders or fallback so arrays align
-            loadedImages.push(img);
-            setLoadedCount(prev => prev + 1);
-            resolve();
-          };
-        });
-      }
-      
+      const ordered: HTMLImageElement[] = new Array(FRAME_COUNT);
+      let count = 0;
+
+      await Promise.all(
+        Array.from({ length: FRAME_COUNT }, (_, i) =>
+          new Promise<void>((resolve) => {
+            const img = new Image();
+            img.src = `/sequence/frame_${i.toString().padStart(3, "0")}.webp`;
+            img.onload = () => {
+              ordered[i] = img;
+              count++;
+              setLoadedCount(count);
+              resolve();
+            };
+            img.onerror = () => {
+              ordered[i] = img;
+              count++;
+              setLoadedCount(count);
+              resolve();
+            };
+          })
+        )
+      );
+
       if (!canceled) {
-        setImages(loadedImages);
-        setTimeout(() => setIsReady(true), 500); // Small buffer before reveal
+        setImages(ordered);
+        setIsReady(true);
       }
     };
 
@@ -137,20 +138,24 @@ export default function SeztaurantReveal() {
 
     let localFrame = 0;
     
-    // Draw an image onto the canvas mimicking "object-fit: contain"
+    // Draw an image onto the canvas:
+    // portrait (mobile) → contain so full image is visible
+    // landscape (desktop) → cover so it fills the screen
     const drawImage = (img: HTMLImageElement) => {
       if (!img || !img.width) return;
       const { width, height } = canvas;
-      
-      // Calculate scale to contain image in canvas
-      const scale = Math.min(width / img.width, height / img.height);
-      const x = (width / 2) - (img.width / 2) * scale;
+
+      const isPortrait = height > width;
+      const scale = isPortrait
+        ? Math.min(width / img.width, height / img.height)   // contain on mobile
+        : Math.max(width / img.width, height / img.height);  // cover on desktop
+
+      const x = (width  / 2) - (img.width  / 2) * scale;
       const y = (height / 2) - (img.height / 2) * scale;
-      
-      // Clear with background color instead of clearRect
+
       ctx.fillStyle = "#050505";
       ctx.fillRect(0, 0, width, height);
-      
+
       ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
 
@@ -191,7 +196,7 @@ export default function SeztaurantReveal() {
   const indicatorOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
 
   return (
-    <section ref={containerRef} className="relative h-[400vh] bg-background">
+    <section ref={containerRef} className="relative h-[250vh] md:h-[400vh] bg-background">
       {!isReady ? (
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center bg-background">
           <div className="relative w-64 h-1 bg-white/10 rounded-full overflow-hidden mb-6">

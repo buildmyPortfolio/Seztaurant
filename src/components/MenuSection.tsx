@@ -650,7 +650,7 @@ function MenuModal({ item, onClose }: { item: MenuItem; onClose: () => void }) {
           </button>
 
           {/* Image */}
-          <div className={`relative aspect-video bg-gradient-to-br overflow-hidden rounded-t-3xl ${cfg.imgLight} ${cfg.imgDark}`}>
+          <div className={`relative aspect-video overflow-hidden rounded-t-3xl ${!item.image ? `bg-gradient-to-br ${cfg.imgLight} ${cfg.imgDark}` : "bg-stone-100 dark:bg-[#1a1a1a]"}`}>
             {item.image ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={item.image} alt={item.name} className="absolute inset-0 w-full h-full object-cover" />
@@ -659,8 +659,6 @@ function MenuModal({ item, onClose }: { item: MenuItem; onClose: () => void }) {
                 {item.icon}
               </span>
             )}
-            {/* Bottom fade into modal bg */}
-            <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white dark:from-[#161616] to-transparent pointer-events-none" />
           </div>
 
           {/* Content */}
@@ -689,12 +687,6 @@ function MenuModal({ item, onClose }: { item: MenuItem; onClose: () => void }) {
 
             {/* Divider */}
             <div className="h-px bg-stone-100 dark:bg-white/[0.06] mb-5" />
-
-            {/* Serves info */}
-            <div className="flex items-center gap-2 text-xs text-stone-400 dark:text-white/30 mb-5">
-              <span>👥</span>
-              <span>Serves 15–18 pax &nbsp;·&nbsp; Made to order (2–3 days advance)</span>
-            </div>
 
             {/* Size picker for pasta */}
             {item.sizes && (
