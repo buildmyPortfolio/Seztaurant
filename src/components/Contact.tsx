@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 const CONTACTS = [
   {
@@ -71,26 +72,28 @@ export default function Contact() {
               target={c.href.startsWith("http") ? "_blank" : undefined}
               rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
               {...fadeUp(0.1 + i * 0.12)}
-              className="group flex flex-col p-8 rounded-2xl bg-stone-50 dark:bg-white/[0.025] border border-stone-200 dark:border-white/[0.06] hover:border-gold/40 dark:hover:border-gold/30 hover:bg-white dark:hover:bg-white/[0.04] transition-all duration-500 shadow-sm dark:shadow-none"
+              className="group block"
             >
-              {/* Top accent */}
-              <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <GlowCard glowColor="gold" customSize className="flex flex-col p-8 h-full">
+                {/* Top accent */}
+                <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-              <span className="text-3xl mb-5 select-none">{c.icon}</span>
-              <span className="font-sans text-[10px] text-gold tracking-[0.25em] uppercase mb-2">
-                {c.label}
-              </span>
-              <span className="font-display text-stone-800 dark:text-white text-lg font-semibold leading-snug mb-1 group-hover:text-gold transition-colors duration-300">
-                {c.value}
-              </span>
-              {c.sub && (
-                <span className="font-sans text-stone-400 dark:text-white/30 text-xs leading-relaxed">{c.sub}</span>
-              )}
+                <span className="text-3xl mb-5 select-none">{c.icon}</span>
+                <span className="font-sans text-[10px] text-gold tracking-[0.25em] uppercase mb-2">
+                  {c.label}
+                </span>
+                <span className="font-display text-stone-800 dark:text-white text-lg font-semibold leading-snug mb-1 group-hover:text-gold transition-colors duration-300">
+                  {c.value}
+                </span>
+                {c.sub && (
+                  <span className="font-sans text-stone-400 dark:text-white/30 text-xs leading-relaxed">{c.sub}</span>
+                )}
 
-              {/* Arrow indicator */}
-              <span className="mt-auto pt-5 text-gold/40 dark:text-gold/30 group-hover:text-gold/70 dark:group-hover:text-gold/60 transition-colors duration-300 text-sm">
-                → Visit
-              </span>
+                {/* Arrow indicator */}
+                <span className="mt-auto pt-5 text-gold/40 dark:text-gold/30 group-hover:text-gold/70 dark:group-hover:text-gold/60 transition-colors duration-300 text-sm">
+                  → Visit
+                </span>
+              </GlowCard>
             </motion.a>
           ))}
         </div>

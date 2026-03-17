@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 const STEPS = [
   {
@@ -75,7 +76,7 @@ export default function OrderInfo() {
                 <div className="hidden lg:block absolute top-[52px] left-[calc(100%+10px)] w-5 h-px bg-gradient-to-r from-gold/30 to-transparent" />
               )}
 
-              <div className="h-full p-7 rounded-2xl bg-white dark:bg-white/[0.025] border border-stone-200 dark:border-white/[0.06] group-hover:border-gold/40 dark:group-hover:border-gold/25 group-hover:bg-stone-50 dark:group-hover:bg-white/[0.04] transition-all duration-500 shadow-sm dark:shadow-none">
+              <GlowCard glowColor="gold" customSize className="h-full p-7">
                 {/* Step number */}
                 <span className="font-display text-6xl font-bold leading-none text-gold/20 dark:text-gold/15 group-hover:text-gold/40 dark:group-hover:text-gold/30 transition-colors duration-500 block mb-5">
                   {s.step}
@@ -84,7 +85,7 @@ export default function OrderInfo() {
                   {s.title}
                 </h3>
                 <p className="font-sans text-stone-500 dark:text-white/40 text-sm leading-relaxed">{s.desc}</p>
-              </div>
+              </GlowCard>
             </motion.div>
           ))}
         </div>

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -525,83 +526,81 @@ function MenuCard({
       transition={{ duration: 0.4, delay: index * 0.04, ease: "easeOut" }}
       onClick={onClick}
       className={`
-        group relative text-left w-full rounded-2xl overflow-hidden cursor-pointer
-        bg-white dark:bg-[#111111]
-        border border-stone-200/80 dark:border-white/[0.07]
-        shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-gold/[0.08]
-        hover:border-gold/50 dark:hover:border-gold/30
+        group relative text-left w-full cursor-pointer
         hover:-translate-y-1.5
         transition-all duration-300
         focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2
         focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-[#070707]
       `}
     >
-      {/* ── Placeholder image ── */}
-      <div
-        className={`relative aspect-[4/3] bg-gradient-to-br overflow-hidden
-          ${cfg.imgLight} ${cfg.imgDark}`}
-      >
-        {/* Future real image */}
-        {item.image && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={item.image}
-            alt={item.name}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
+      <GlowCard glowColor="gold" customSize className="w-full overflow-hidden text-left">
+        {/* ── Placeholder image ── */}
+        <div
+          className={`relative aspect-[4/3] bg-gradient-to-br overflow-hidden
+            ${cfg.imgLight} ${cfg.imgDark}`}
+        >
+          {/* Future real image */}
+          {item.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={item.image}
+              alt={item.name}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
 
-        {/* Emoji (hidden when real image exists) */}
-        {!item.image && (
-          <span className="absolute inset-0 flex items-center justify-center text-6xl md:text-7xl select-none pointer-events-none drop-shadow-md transition-transform duration-500 group-hover:scale-110">
-            {item.icon}
+          {/* Emoji (hidden when real image exists) */}
+          {!item.image && (
+            <span className="absolute inset-0 flex items-center justify-center text-6xl md:text-7xl select-none pointer-events-none drop-shadow-md transition-transform duration-500 group-hover:scale-110">
+              {item.icon}
+            </span>
+          )}
+
+          {/* Category badge top-left */}
+          <span className={`absolute top-3 left-3 text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full backdrop-blur-sm ${cfg.badge}`}>
+            {cfg.label}
           </span>
-        )}
 
-        {/* Category badge top-left */}
-        <span className={`absolute top-3 left-3 text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full backdrop-blur-sm ${cfg.badge}`}>
-          {cfg.label}
-        </span>
-
-        {/* Price pill bottom-right */}
-        <span className="absolute bottom-3 right-3 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/90 dark:bg-black/65 backdrop-blur-sm font-sans font-bold text-gold text-xs sm:text-sm tabular-nums shadow-sm">
-          {getDisplayPrice(item)}
-        </span>
-
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <span className="flex items-center gap-2 text-white text-[11px] font-bold tracking-[0.15em] uppercase bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/25">
-            View Details →
+          {/* Price pill bottom-right */}
+          <span className="absolute bottom-3 right-3 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white/90 dark:bg-black/65 backdrop-blur-sm font-sans font-bold text-gold text-xs sm:text-sm tabular-nums shadow-sm">
+            {getDisplayPrice(item)}
           </span>
-        </div>
-      </div>
 
-      {/* ── Card body ── */}
-      <div className="p-4 sm:p-5">
-        <h3 className="font-display font-bold text-stone-800 dark:text-white/90 text-base sm:text-lg leading-snug mb-2 line-clamp-2 group-hover:text-[#b8922b] dark:group-hover:text-gold transition-colors duration-300">
-          {item.name}
-        </h3>
-
-        <p className="font-sans text-stone-500 dark:text-white/40 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-3">
-          {item.description}
-        </p>
-
-        {item.note && (
-          <p className="font-sans text-stone-400 dark:text-white/25 text-[11px] italic mb-2">
-            {item.note}
-          </p>
-        )}
-
-        {item.sizes && (
-          <div className="flex flex-wrap gap-1.5 mt-1">
-            {item.sizes.map((s) => (
-              <span key={s.label} className="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-stone-100 dark:bg-white/[0.06] text-stone-500 dark:text-white/40 border border-stone-200 dark:border-white/[0.06]">
-                {s.label}
-              </span>
-            ))}
+          {/* Hover overlay */}
+          <div className="absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="flex items-center gap-2 text-white text-[11px] font-bold tracking-[0.15em] uppercase bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/25">
+              View Details →
+            </span>
           </div>
-        )}
-      </div>
+        </div>
+
+        {/* ── Card body ── */}
+        <div className="p-4 sm:p-5">
+          <h3 className="font-display font-bold text-stone-800 dark:text-white/90 text-base sm:text-lg leading-snug mb-2 line-clamp-2 group-hover:text-[#b8922b] dark:group-hover:text-gold transition-colors duration-300">
+            {item.name}
+          </h3>
+
+          <p className="font-sans text-stone-500 dark:text-white/40 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-3">
+            {item.description}
+          </p>
+
+          {item.note && (
+            <p className="font-sans text-stone-400 dark:text-white/25 text-[11px] italic mb-2">
+              {item.note}
+            </p>
+          )}
+
+          {item.sizes && (
+            <div className="flex flex-wrap gap-1.5 mt-1">
+              {item.sizes.map((s) => (
+                <span key={s.label} className="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full bg-stone-100 dark:bg-white/[0.06] text-stone-500 dark:text-white/40 border border-stone-200 dark:border-white/[0.06]">
+                  {s.label}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </GlowCard>
     </motion.button>
   );
 }

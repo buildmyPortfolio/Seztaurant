@@ -25,12 +25,10 @@ export default function Footer() {
 
           {/* Brand block */}
           <div className="text-center md:text-left">
-            <div className="flex items-center gap-2.5 justify-center md:justify-start mb-3">
-              <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center shrink-0">
-                <span className="font-display font-bold text-background text-sm leading-none">S</span>
-              </div>
-              <span className="font-display font-semibold text-stone-800 dark:text-white text-xl tracking-wide">
-                eztaurant
+            <div className="flex items-center justify-center md:justify-start mb-3">
+              <span className="font-display font-bold text-3xl tracking-tight leading-none">
+                <span style={{ color: "#8A9A5B" }}>S</span>
+                <span className="text-stone-800 dark:text-white">eztaurant</span>
               </span>
             </div>
             <p className="font-sans text-stone-400 dark:text-white/30 text-xs leading-relaxed max-w-[200px] mx-auto md:mx-0">

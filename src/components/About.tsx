@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 const FEATURES = [
   {
@@ -72,16 +73,20 @@ export default function About() {
             <motion.div
               key={f.title}
               {...fadeUp(0.15 + i * 0.12)}
-              className="group relative p-8 rounded-2xl bg-stone-50 dark:bg-white/[0.025] border border-stone-200 dark:border-white/[0.06] hover:border-gold/40 dark:hover:border-gold/30 hover:bg-white dark:hover:bg-white/[0.04] transition-all duration-500 shadow-sm dark:shadow-none"
             >
-              {/* Top accent line */}
-              <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="text-4xl mb-6 select-none">{f.icon}</div>
-              <h3 className="font-display text-xl font-semibold text-stone-800 dark:text-white mb-3 leading-snug">
-                {f.title}
-              </h3>
-              <p className="text-stone-500 dark:text-white/45 font-sans text-sm leading-relaxed">{f.desc}</p>
+              <GlowCard
+                glowColor="gold"
+                customSize
+                className="group p-8 h-full bg-stone-50 dark:bg-white/[0.02] border-0 hover:shadow-gold/10 transition-all duration-500"
+              >
+                {/* Top accent line */}
+                <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="text-4xl mb-6 select-none">{f.icon}</div>
+                <h3 className="font-display text-xl font-semibold text-stone-800 dark:text-white mb-3 leading-snug">
+                  {f.title}
+                </h3>
+                <p className="text-stone-500 dark:text-white/45 font-sans text-sm leading-relaxed">{f.desc}</p>
+              </GlowCard>
             </motion.div>
           ))}
         </div>

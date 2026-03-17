@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import About from "@/components/About";
 import MenuSection from "@/components/MenuSection";
+import MenuBanner from "@/components/MenuBanner";
 import Showcase from "@/components/Showcase";
 import OrderInfo from "@/components/OrderInfo";
 import Contact from "@/components/Contact";
@@ -14,6 +15,7 @@ export default function Home() {
       <HeroSection />
       <About />
       <MenuSection />
+      <MenuBanner />
       <Showcase />
       <OrderInfo />
       <Contact />

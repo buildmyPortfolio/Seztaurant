@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "Menu",    id: "menu" },
@@ -52,19 +51,10 @@ export default function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center shrink-0"
           >
-            {/* Light mode: LogoBlack, Dark mode: Logo (white) */}
-            {mounted && (
-              <Image
-                src={isDark ? "/assets/Logo.jpg" : "/assets/LogoBlack.jpg"}
-                alt="Seztaurant"
-                width={140}
-                height={40}
-                className="h-9 w-auto object-contain"
-                priority
-              />
-            )}
-            {/* Fallback before mount to avoid layout shift */}
-            {!mounted && <div className="h-9 w-[140px]" />}
+            <span className="font-display font-bold text-2xl tracking-tight leading-none">
+              <span style={{ color: "#8A9A5B" }}>S</span>
+              <span className="text-stone-800 dark:text-white">eztaurant</span>
+            </span>
           </button>
 
           {/* ── Desktop links ── */}
@@ -101,7 +91,7 @@ export default function Navbar() {
                 className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 border ${
                   scrolled
                     ? "border-stone-200 dark:border-white/[0.1] bg-stone-100/80 dark:bg-white/[0.06] text-stone-500 dark:text-white/50 hover:text-stone-800 dark:hover:text-white hover:border-gold/40 dark:hover:border-gold/30"
-                    : "border-white/20 bg-white/10 text-white/70 hover:text-white hover:border-white/40"
+                    : "border-stone-300 dark:border-white/20 bg-stone-100/60 dark:bg-white/10 text-stone-500 dark:text-white/70 hover:text-stone-800 dark:hover:text-white hover:border-gold/40"
                 }`}
               >
                 {isDark ? (
@@ -124,7 +114,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
               className={`md:hidden flex flex-col gap-[5px] w-6 transition-colors ${
-                scrolled ? "text-stone-600 dark:text-white/70" : "text-white/70"
+                scrolled ? "text-stone-600 dark:text-white/70" : "text-stone-600 dark:text-white/70"
               } hover:text-gold`}
             >
               <span className={`block h-[1.5px] w-6 bg-current rounded-full transition-all duration-300 origin-center ${mobileOpen ? "rotate-45 translate-y-[6.5px]" : ""}`} />
