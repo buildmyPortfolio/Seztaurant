@@ -60,11 +60,11 @@ const GlowCard: React.FC<GlowCardProps> = ({
   if (isMobile) {
     return (
       <div
-        className={`relative rounded-2xl border ${
-          isDark
-            ? "bg-[#111111] border-white/[0.07]"
-            : "bg-white border-stone-200"
-        } ${className}`}
+        style={{
+          backgroundColor: isDark ? "#111111" : "#ffffff",
+          border: isDark ? "1px solid rgba(255,255,255,0.07)" : "1px solid #e7e5e4",
+        }}
+        className={`relative rounded-2xl ${className}`}
       >
         {children}
       </div>
@@ -102,6 +102,10 @@ const GlowCard: React.FC<GlowCardProps> = ({
   }
 
   const css = `
+    @media (max-width: 640px) {
+      [data-glow]::before, [data-glow]::after { display: none !important; }
+      [data-glow] { background-image: none !important; background-attachment: scroll !important; }
+    }
     [data-glow]::before,[data-glow]::after {
       pointer-events: none;
       content: "";
