@@ -518,16 +518,24 @@ function MenuCard({
   onClick: () => void;
 }) {
   const cfg = CAT_CONFIG[item.category];
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   return (
     <motion.button
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.04, ease: "easeOut" }}
+      initial={isMobile ? false : { opacity: 0, y: 20 }}
+      animate={isMobile ? {} : { opacity: 1, y: 0 }}
+      transition={isMobile ? {} : { duration: 0.4, delay: index * 0.04, ease: "easeOut" }}
       onClick={onClick}
       className={`
         group relative text-left w-full cursor-pointer
-        hover:-translate-y-1.5
+        md:hover:-translate-y-1.5
         transition-all duration-300
         focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2
         focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-[#070707]

@@ -73,7 +73,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
     backgroundAttachment: "fixed",
     border: "var(--border-size) solid var(--backup-border)",
     position: "relative" as const,
-    touchAction: "none" as const,
+    touchAction: "pan-y" as const,
   }
 
   const css = `
