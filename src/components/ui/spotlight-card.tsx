@@ -27,8 +27,16 @@ const GlowCard: React.FC<GlowCardProps> = ({
   const cardRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
-  useEffect(() => { setMounted(true) }, [])
+  useEffect(() => {
+    setMounted(true)
+    const mq = window.matchMedia("(max-width: 640px)")
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
 
   useEffect(() => {
     const syncPointer = (e: PointerEvent) => {
@@ -47,6 +55,23 @@ const GlowCard: React.FC<GlowCardProps> = ({
   const { base, spread } = glowColorMap[glowColor]
 
   const isDark = mounted && resolvedTheme === "dark"
+
+  // ── Mobile: plain card, no glow ──────────────────────────────────────────
+  if (isMobile) {
+    return (
+      <div
+        className={`relative rounded-2xl border ${
+          isDark
+            ? "bg-[#111111] border-white/[0.07]"
+            : "bg-white border-stone-200"
+        } ${className}`}
+      >
+        {children}
+      </div>
+    )
+  }
+
+  // ── Desktop: full glow effect ─────────────────────────────────────────────
   const backdrop    = isDark ? "hsl(0 0% 6% / 0.70)"   : "hsl(0 0% 100% / 0.90)"
   const backupBorder = isDark ? "hsl(45 60% 40% / 0.15)" : "hsl(45 60% 40% / 0.25)"
 

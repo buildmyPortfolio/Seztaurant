@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   title: "Seztaurant — Home of Homemade Dishes",
   description:
     "Made-to-order Filipino homemade dishes for 15–18 pax. Based in Marikina City. Order 2–3 days in advance.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
