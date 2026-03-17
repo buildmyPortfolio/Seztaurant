@@ -14,7 +14,7 @@ export default function MenuBanner() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/assets/Menu.jpg"
+          src="/assets/Menu2.png"
           alt="Seztaurant Full Menu"
           className="w-full h-auto rounded-2xl shadow-xl shadow-black/10 dark:shadow-black/40"
         />
