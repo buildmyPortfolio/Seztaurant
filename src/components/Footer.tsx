@@ -53,7 +53,7 @@ export default function Footer() {
           {/* Social / contact */}
           <div className="flex items-center gap-4">
             <a
-              href="https://www.facebook.com/Seztaurant"
+              href="https://www.facebook.com/seztaurant.ph/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 rounded-full bg-stone-100 dark:bg-white/[0.05] border border-stone-200 dark:border-white/[0.08] flex items-center justify-center text-stone-400 dark:text-white/40 hover:text-gold hover:border-gold/30 transition-all duration-300"

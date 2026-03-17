@@ -24,7 +24,7 @@ const CONTACTS = [
     label: "Facebook",
     value: "Seztaurant",
     sub: "Analiza Cordova · Page: Seztaurant",
-    href: "https://www.facebook.com/Seztaurant",
+    href: "https://www.facebook.com/seztaurant.ph/",
   },
 ];
 

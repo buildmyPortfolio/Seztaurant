@@ -110,7 +110,7 @@ export default function OrderInfo() {
                 📞 +949-465-9619
               </a>
               <a
-                href="https://www.facebook.com/Seztaurant"
+                href="https://www.facebook.com/seztaurant.ph/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-7 py-3 rounded-full bg-stone-100 dark:bg-white/[0.06] border border-stone-200 dark:border-white/[0.1] text-stone-600 dark:text-white/70 hover:text-stone-900 dark:hover:text-white text-xs font-semibold tracking-widest uppercase hover:border-gold/30 transition-all duration-300 text-center"
