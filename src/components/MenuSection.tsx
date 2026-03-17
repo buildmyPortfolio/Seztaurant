@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { GlowCard } from "@/components/ui/spotlight-card";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -518,30 +517,26 @@ function MenuCard({
   onClick: () => void;
 }) {
   const cfg = CAT_CONFIG[item.category];
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 640px)");
-    setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
 
   return (
     <motion.button
-      initial={isMobile ? false : { opacity: 0, y: 20 }}
-      animate={isMobile ? {} : { opacity: 1, y: 0 }}
-      transition={isMobile ? {} : { duration: 0.4, delay: index * 0.04, ease: "easeOut" }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.04, ease: "easeOut" }}
       onClick={onClick}
       className={`
-        group relative text-left w-full cursor-pointer
-        md:hover:-translate-y-1.5
+        group relative text-left w-full rounded-2xl overflow-hidden cursor-pointer
+        bg-white dark:bg-[#111111]
+        border border-stone-200/80 dark:border-white/[0.07]
+        shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-gold/[0.08]
+        hover:border-gold/50 dark:hover:border-gold/30
+        hover:-translate-y-1.5
         transition-all duration-300
         focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2
         focus-visible:ring-offset-light-bg dark:focus-visible:ring-offset-[#070707]
       `}
     >
-      <GlowCard glowColor="gold" customSize className="w-full overflow-hidden text-left">
+      <div className="w-full text-left">
         {/* ── Placeholder image ── */}
         <div
           className={`relative aspect-[4/3] bg-gradient-to-br overflow-hidden
@@ -608,7 +603,7 @@ function MenuCard({
             </div>
           )}
         </div>
-      </GlowCard>
+      </div>
     </motion.button>
   );
 }
